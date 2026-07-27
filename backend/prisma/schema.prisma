@@ -1,0 +1,48 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Question {
+  id              String     @id @default(uuid())
+  leetcodeId      Int?
+  title           String
+  slug            String     @unique
+  problemLink     String
+  difficulty      Difficulty
+  topics          String[]
+  companyTags     String[]
+  questionType    String[]
+  timeComplexity  String     @default("")
+  spaceComplexity String     @default("")
+  notes           String     @default("")
+  comments        Comment[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@index([leetcodeId])
+  @@index([title])
+  @@index([difficulty])
+  @@index([topics])
+  @@index([companyTags])
+  @@index([questionType])
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
