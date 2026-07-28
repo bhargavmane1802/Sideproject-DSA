@@ -10,6 +10,7 @@ export const createQuestionSchema = z.object({
   questionType: z.array(z.string()).default([]),
   timeComplexity: z.string().default(''),
   spaceComplexity: z.string().default(''),
+  description: z.string().default(''),
   notes: z.string().default(''),
 });
 

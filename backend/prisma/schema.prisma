@@ -25,6 +25,7 @@ model Question {
   questionType    String[]
   timeComplexity  String     @default("")
   spaceComplexity String     @default("")
+  description     String     @default("")
   notes           String     @default("")
   comments        Comment[]
   createdAt       DateTime   @default(now())

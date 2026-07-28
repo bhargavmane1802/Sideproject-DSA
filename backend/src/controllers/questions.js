@@ -33,6 +33,7 @@ const QUESTION_DETAIL_QUERY = `
       title
       titleSlug
       difficulty
+      content
       topicTags {
         name
         slug
@@ -332,6 +333,7 @@ export const importFromLeetCode = async (req, res, next) => {
       questionType: [],
       timeComplexity: '',
       spaceComplexity: '',
+      description: q.content || '',
       notes: '',
     };
 
